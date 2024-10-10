@@ -107,9 +107,10 @@ describe('PixelPop', function() {
         })
         // list
         it('[TC0012] User can search media based on valid name keywords', async function(){
+            await driver.sleep(500);
             var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[2]//p`);
             await element.fillFilledXpath(`//input[@name="name"]`, keyword, true);
-            await driver.sleep(1500);
+            await driver.sleep(4000);
             await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[2]//p`, keyword);
         })
         it('[TC0013] User can not search media based on invalid name keywords', async function(){
@@ -125,10 +126,10 @@ describe('PixelPop', function() {
         })
         it('[TC0015] User can not search media based on invalid duration keywords', async function(){
             await element.fillFilledXpath(`//input[@name="duration_end"]`, '1234567890', true);
-            await driver.sleep(1500);
+            await driver.sleep(4000);
             await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
             await element.clearInputXpath(`//input[@name="duration_end"]`);
-            await driver.sleep(500);
+            await driver.sleep(3000);
         })
         it('[TC0017] User can search media based on valid resolution keywords', async function(){
             await element.fillFilledXpath(`//input[@name="resolution"]`, '640', true);
