@@ -1,0 +1,30 @@
+{
+  "name": "automation-test-pixelpop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "mocha -r dotenv/config --timeout 240000 --reporter allure-mocha",
+    "start": "allure open allure-report --port 8080",
+    "report": "allure generate allure-results --clean",
+    "test": "mocha -r dotenv/config --timeout 240000"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "allure-commandline": "^2.21.0",
+    "allure-mocha": "^2.1.0",
+    "chai": "^4.3.6",
+    "chromedriver": "^111.0.0",
+    "dotenv": "^16.0.3",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.4.0"
+  },
+  "devDependencies": {
+    "allure-mocha": "^2.1.0",
+    "mocha": "^10.2.0"
+  }
+  
+}
