@@ -18,7 +18,6 @@ describe('PixelPop', function() {
             await driver.sleep(500);
             await element.getElement(`//div[contains(@class,"header-title")]/span[normalize-space()='Media']`);
             await element.getElement(`//table[contains(@class,"table")]`);
-            //tr[@data-role="table-row"]
             await assertion.assertionElementExist(`//thead//td[contains(@class,"table-cell")]//p[normalize-space()='Name']`);
             await assertion.assertionElementExist(`//thead//td[contains(@class,"table-cell")]//p[normalize-space()='Duration']`);
             await assertion.assertionElementExist(`//thead//td[contains(@class,"table-cell")]//p[normalize-space()='Resolution']`);
