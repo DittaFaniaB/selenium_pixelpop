@@ -6,7 +6,7 @@ const assertion = require('../../helpers/assertion');
 
 describe('PixelPop', function() {
     describe('Display Page', function() {
-        const OTP_VALUE='604991';
+        const OTP_VALUE='400081';
         before(async function() { 
             await reusable_step.loginPage(process.env.EMAIL, process.env.PASSWORD);
         })
@@ -27,53 +27,7 @@ describe('PixelPop', function() {
             await assertion.assertionElementExist(`//thead//td[contains(@class,"table-cell")]//p[normalize-space()='Media']`);
             await assertion.assertionElementExist(`//thead//td[contains(@class,"table-cell")]//p[normalize-space()='Action']`);
         })
-        it('[TC0038] User can search Display based on valid Display ID keywords', async function(){
-            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[2]//p`);
-            await element.fillFilledXpath(`//input[@name="serial"]`, keyword, true);
-            await driver.sleep(2000);
-            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[2]//p`, keyword);
-        })
-        it('[TC0039] User can not search Display based on invalid Display ID keywords', async function(){
-            await element.fillFilledXpath(`//input[@name="serial"]`, 'invalid!@#$%^&*(', true);
-            await driver.sleep(3000);
-            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
-            await element.clearInputXpath(`//input[@name="serial"]`);
-            await driver.sleep(3000);
-        })
-        it('[TC0040] User can search Display based on valid Display Name keywords', async function(){
-            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[3]//p`);
-            await element.fillFilledXpath(`//input[@name="name"]`, keyword, true);
-            await driver.sleep(3000);
-            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[3]//p`, keyword);
-        })
-        it('[TC0041] User can not search Display based on invalid Display Name keywords', async function(){
-            await element.fillFilledXpath(`//input[@name="name"]`, 'invalid!@#$%^&*(', true);
-            await driver.sleep(2500);
-            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
-            await element.clearInputXpath(`//input[@name="name"]`);
-            await driver.sleep(4000);
-        })
-        it('[TC0042] User can search Display based on status', async function(){
-            await element.clickButtonXpath(`//select[@name="status"]/option[contains(text(), 'Offline')]`);
-            await driver.sleep(2000);
-            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[4]//div[@class="badge-content"]`, 'offline');
-            await element.clickButtonXpath(`//select[@name="status"]/option[contains(text(), 'Select')]`);
-            await driver.sleep(2500);
-        })
-        it('[TC0043] User can search Display based on valid Media Name keywords', async function(){
-            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[7]//p`);
-            await element.fillFilledXpath(`//input[@name="content_name"]`, keyword, true);
-            await driver.sleep(2000);
-            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[7]//p`, keyword);
-                
-        })
-        it('[TC0044] User can not search Display based on invalid Media Name keywords', async function(){
-            await element.fillFilledXpath(`//input[@name="content_name"]`, 'invalid!@#$%^&*(', true);
-            await driver.sleep(2000);
-            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
-            await element.clearInputXpath(`//input[@name="content_name"]`);
-            await driver.sleep(2000);
-        })
+
         // add 
         it('[TC0047] User cannot add new display with invalid OTP', async function(){
             await element.clickButtonXpath(`//button[normalize-space()='Add']`);
@@ -185,6 +139,63 @@ describe('PixelPop', function() {
             await element.getElement(`//h3[contains(text(), 'Success!')]`);
             await element.getElement(`//p[contains(text(), 'Your display has been created successfully.')]`);
         })
+
+        // list
+        it('[TC0038] User can search Display based on valid Display ID keywords', async function(){
+            await driver.sleep(4000);
+            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[2]//p`);
+            await element.fillFilledXpath(`//input[@name="serial"]`, keyword, true);
+            await driver.sleep(5000);
+            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[2]//p`, keyword);
+            await driver.sleep(4000);
+        })
+        it('[TC0039] User can not search Display based on invalid Display ID keywords', async function(){
+            await element.fillFilledXpath(`//input[@name="serial"]`, 'invalid!@#$%^&*(', true);
+            await driver.sleep(5000);
+            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
+            await element.clearInputXpath(`//input[@name="serial"]`);
+            await driver.sleep(4000);
+        })
+        it('[TC0040] User can search Display based on valid Display Name keywords', async function(){
+            await driver.sleep(4000);
+            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[3]//p`);
+            await element.fillFilledXpath(`//input[@name="name"]`, keyword, true);
+            await driver.sleep(5000);
+            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[3]//p`, keyword);
+            await driver.sleep(5000);
+        })
+        it('[TC0041] User can not search Display based on invalid Display Name keywords', async function(){
+            await driver.sleep(4000);
+            await element.fillFilledXpath(`//input[@name="name"]`, 'invalid!@#$%^&*(', true);
+            await driver.sleep(5000);
+            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
+            await element.clearInputXpath(`//input[@name="name"]`);
+            await driver.sleep(4000);
+        })
+        it('[TC0042] User can search Display based on status', async function(){
+            await driver.sleep(4000);
+            await element.clickButtonXpath(`//select[@name="status"]/option[contains(text(), 'Offline')]`);
+            await driver.sleep(5000);
+            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[4]//div[@class="badge-content"]`, 'offline');
+            await element.clickButtonXpath(`//select[@name="status"]/option[contains(text(), 'Select')]`);
+            await driver.sleep(4000);
+        })
+        it('[TC0043] User can search Display based on valid Media Name keywords', async function(){
+            await driver.sleep(4000);
+            var keyword = await element.getTextXpath(`//tr[@data-role="table-row"][2]//td[7]//p`);
+            await element.fillFilledXpath(`//input[@name="content_name"]`, keyword, true);
+            await driver.sleep(5000);
+            await assertion.assertionValue(`//tr[@data-role="table-row"][1]//td[7]//p`, keyword);
+            await driver.sleep(4000);
+        })
+        it('[TC0044] User can not search Display based on invalid Media Name keywords', async function(){
+            await element.fillFilledXpath(`//input[@name="content_name"]`, 'invalid!@#$%^&*(', true);
+            await driver.sleep(4000);
+            await element.getElement(`//p[normalize-space()='Sorry, no data available.']`);
+            await element.clearInputXpath(`//input[@name="content_name"]`);
+            await driver.sleep(4000);
+        })
+
         // detail
         it('[TC0060] User can see detail of the display', async function(){
             var arr = [];
@@ -215,6 +226,7 @@ describe('PixelPop', function() {
             await driver.sleep(1000);
             await element.clickButtonXpath(`//button[normalize-space()='Try again']`);
         })
+
         // edit
         it('[TC0063] User can edit display from detail page with valid input', async function(){
             await element.clickButtonXpath(`//button[normalize-space()='Edit']`);
@@ -308,6 +320,7 @@ describe('PixelPop', function() {
             await element.getElement(`//p[contains(text(), 'Please make sure the file you select is in image/png, image/jpg, image/jpeg format')]`);
             await driver.sleep(2000);  
         })
+
         // delete
         it('[TC0059] User can not delete display when it is still playing', async function(){
             await element.clickButtonXpath(`//button[normalize-space()='Display']`);
